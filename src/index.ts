@@ -21,7 +21,7 @@ async function fetchRates(symbol: string) {
   
   const parsed = await parseXml(ratesEcbXml);
   const mapped = parsed.CompactData.DataSet[0].Series[0].Obs.reduce((acc, cur) => {
-    acc[new Date(cur.$.TIME_PERIOD).toISOString()] = cur.$.OBS_VALUE;
+    acc[cur.$.TIME_PERIOD] = cur.$.OBS_VALUE;
     return acc;
   }, {});
   return mapped;
